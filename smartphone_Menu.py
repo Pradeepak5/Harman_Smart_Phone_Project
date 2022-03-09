@@ -1,4 +1,5 @@
 import sqlite3 as sql
+from prettytable import PrettyTable
 
 connection=sql.connect("Mobile.db")
 
@@ -47,27 +48,19 @@ while True:
     elif choice==2:
         result=connection.execute("select * from Smart_Phones")
 
+        table=PrettyTable(["ID","S.NO","BRAND","MODEL","MANUFACTURE YEAR","MANUFACTURE MONTH","PRICE"])
         for i in result:
-            print("Mobile ID :",i[0])
-            print("Mobile S_NO :",i[1])
-            print("Mobile Brand :",i[2])
-            print("Mobile Model :",i[3])
-            print("Mobile Manufacture Year :",i[4])
-            print("Mobile Manufacture Month :",i[5])
-            print("Mobile Price :",i[6])
+            table.add_row([i[0],i[1],i[2],i[3],i[4],i[5],i[6]])
+        print(table)
 
     elif choice==3:
         getMobBrand=input("Enter the Mobile Brand Looking for : ")
 
         result=connection.execute("select * from Smart_Phones where Brand='"+getMobBrand+"'")
+        table = PrettyTable(["ID", "S.NO", "BRAND", "MODEL", "MANUFACTURE YEAR", "MANUFACTURE MONTH", "PRICE"])
         for i in result:
-            print("Mobile ID :", i[0])
-            print("Mobile S_NO :", i[1])
-            print("Mobile Brand :", i[2])
-            print("Mobile Model :", i[3])
-            print("Mobile Manufacture Year :", i[4])
-            print("Mobile Manufacture Month :", i[5])
-            print("Mobile Price :", i[6])
+            table.add_row([i[0], i[1], i[2], i[3], i[4], i[5], i[6]])
+        print(table)
 
     elif choice==4:
         getS_No=input("Enter the S_NO to get Update : ")
@@ -92,7 +85,7 @@ while True:
         break
 
     else:
-        print("oops You entered the INVALID choice Please try again by choosing VALID choise........")
+        print("oops You entered the INVALID choice Please try again by choosing the VALID option........")
 
 
 
